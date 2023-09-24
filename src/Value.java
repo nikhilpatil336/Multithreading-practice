@@ -14,12 +14,12 @@ public class Value {
         this.value = value;
     }
 
-    public void add(int i)
+    public synchronized void add(int i)
     {
         value += i;
     }
 
-    public void subtract(int i)
+    public synchronized void subtract(int i)
     {
         value -= i;
     }
