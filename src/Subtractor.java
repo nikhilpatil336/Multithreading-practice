@@ -3,11 +3,9 @@ import java.util.concurrent.locks.Lock;
 public class Subtractor implements Runnable{
 
     private Value value;
-    private Lock lock;
 
-    Subtractor(Value value, Lock lock){
+    Subtractor(Value value){
         this.value = value;
-        this.lock = lock;
     }
 
     @Override
@@ -23,9 +21,7 @@ public class Subtractor implements Runnable{
                 e.printStackTrace();
             }
 
-            lock.lock();
             value.subtract(i);
-            lock.unlock();
         }
     }
 }

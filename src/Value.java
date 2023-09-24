@@ -1,26 +1,28 @@
-public class Value {
-    private int value;
+import java.util.concurrent.atomic.AtomicInteger;
 
-    Value(int value)
+public class Value {
+    private AtomicInteger value;
+
+    Value(AtomicInteger value)
     {
         this.value = value;
     }
 
-    public int getValue() {
+    public AtomicInteger getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(AtomicInteger value) {
         this.value = value;
     }
 
     public void add(int i)
     {
-        value += i;
+        value.addAndGet(i);
     }
 
     public void subtract(int i)
     {
-        value -= i;
+       value.addAndGet(-i);
     }
 }
