@@ -1,6 +1,8 @@
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
@@ -9,10 +11,12 @@ public class Main {
         {
             Value v1 = new Value(0);
 
+            Lock lock = new ReentrantLock();
+
             ExecutorService executorService = Executors.newCachedThreadPool();
 
-            executorService.execute(new Adder(v1));
-            executorService.execute(new Subtractor(v1));
+            executorService.execute(new Adder(v1, lock));
+            executorService.execute(new Subtractor(v1, lock));
 
             executorService.shutdown();
             executorService.awaitTermination(3, TimeUnit.SECONDS);

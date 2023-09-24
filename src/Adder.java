@@ -1,10 +1,13 @@
+import java.util.concurrent.locks.Lock;
 
 public class Adder implements Runnable{
 
     private Value value;
+    private Lock lock;
 
-    Adder(Value value){
+    Adder(Value value, Lock lock){
         this.value = value;
+        this.lock = lock;
     }
 
     @Override
@@ -20,7 +23,9 @@ public class Adder implements Runnable{
                 e.printStackTrace();
             }
 
+            lock.lock();
             value.add(i);
+            lock.unlock();
         }
     }
 }
